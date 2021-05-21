@@ -1,20 +1,20 @@
 package lesson1;
 
-public class Cat implements Mobile {
+public class Cat implements Participant {
     private final String name;
     private final int maxHeightJump;
-    private final int maxTimeOfRun;
+    private final int maxDistanceOfRun;
 
-    public Cat(String name, int maxHeightJump, int maxTimeOfRun) {
+    public Cat(String name, int maxHeightJump, int maxDistanceOfRun) {
         this.name = name;
         this.maxHeightJump = maxHeightJump;
-        this.maxTimeOfRun = maxTimeOfRun;
+        this.maxDistanceOfRun = maxDistanceOfRun;
     }
 
     @Override
     public int run() {
         System.out.print(name);
-        return maxTimeOfRun;
+        return maxDistanceOfRun;
     }
 
     @Override

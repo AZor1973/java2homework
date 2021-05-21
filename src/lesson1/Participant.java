@@ -1,6 +1,6 @@
 package lesson1;
 
-public interface Mobile {
+public interface Participant {
     int run();
 
     int jump();

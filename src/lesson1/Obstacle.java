@@ -1,5 +1,5 @@
 package lesson1;
 
 public interface Obstacle {
-    void pass(Mobile mobile);
+    void pass(Participant participant);
 }

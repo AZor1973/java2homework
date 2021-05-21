@@ -1,20 +1,20 @@
 package lesson1;
 
-public class Robot implements Mobile {
+public class Robot implements Participant {
     private final String name;
     private final int maxHeightJump;
-    private final int maxTimeOfRun;
+    private final int maxDistanceOfRun;
 
-    public Robot(String name, int maxHeightJump, int maxTimeOfRun) {
+    public Robot(String name, int maxHeightJump, int maxDistanceOfRun) {
         this.name = name;
         this.maxHeightJump = maxHeightJump;
-        this.maxTimeOfRun = maxTimeOfRun;
+        this.maxDistanceOfRun = maxDistanceOfRun;
     }
 
     @Override
     public int run() {
         System.out.print(name);
-        return maxTimeOfRun;
+        return maxDistanceOfRun;
     }
 
     @Override
