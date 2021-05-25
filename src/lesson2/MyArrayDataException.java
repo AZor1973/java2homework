@@ -1,7 +1,7 @@
 package lesson2;
 
 public class MyArrayDataException extends NumberFormatException {
-    public MyArrayDataException(int i, int j, String s) {
-        System.out.printf("Строку массива [%d][%d] нельзя преобразовать в число - %s.\n", i, j, s);
+    public MyArrayDataException(String s, int i, int j) {
+        super(String.format("Невалидная строка -%s- в ячейке массива [%d][%d].", s, i, j));
     }
 }

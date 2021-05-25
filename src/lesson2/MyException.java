@@ -1,41 +1,59 @@
 package lesson2;
 
 public class MyException {
+    private static final int VALID_SIZE = 4;
+    private static final String[][] VALID_ARRAY = {
+            {"1", "2", "3", "1"},
+            {"4", "6", "0", "9"},
+            {"3", "3", "5", "7"},
+            {"1", "2", "4", "5"}
+    };
+    private static final String[][] INVALID_SIZE_ARRAY = {
+            {"1", "2", "3", "1", "9"},
+            {"4", "6", "0", "9"},
+            {"3", "3", "5", "7"},
+            {"1", "2", "4", "5"}
+    };
+    private static final String[][] INVALID_DATA_ARRAY = {
+            {"1", "2", "3", "1"},
+            {"4", "6", "0", "9"},
+            {"3", "3y", "5", "7"},
+            {"1", "2", "4", "5"}
+    };
+
     public static void main(String[] args) {
-        /*
-         * Статическая инициализация удобна для проверки*/
-        String[][] arr = {
-                {"1", "2", "3", "1"},
-                {"4", "6", "0", "9", "0"},
-                {"3", "3", "5", "7"},
-                {"1", "2", "4i", "5"}
-        };
         try {
-            System.out.println(arraySum(arr));
+            System.out.println("Сумма элементов массива = " + arraySum(VALID_ARRAY));
+            System.out.println("Сумма элементов массива = " + arraySum(INVALID_SIZE_ARRAY));
+            System.out.println("Сумма элементов массива = " + arraySum(INVALID_DATA_ARRAY));
         } catch (MyArraySizeException | MyArrayDataException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private static int arraySum(String[][] array) {
+    private static int arraySum(String[][] array) throws MyArraySizeException, MyArrayDataException {
         int sum = 0;
-        for (String[] strings : array) {
-            if (array.length != 4 || strings.length != 4) {
-                throw new MyArraySizeException();
-            }
-        }
-        /*
-         * Тройной цикл! Ничего умнее придумать не смог.*/
+        checkSizeArray(array);
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                for (int k = 0; k < array[i][j].length(); k++) {
-                    if (!Character.isDigit(array[i][j].charAt(k))) {
-                        throw new MyArrayDataException(i, j, array[i][j]);
-                    }
+                try {
+                    sum += Integer.parseInt(array[i][j]);
+                } catch (NumberFormatException e) {
+                    throw new MyArrayDataException(array[i][j], i, j);
                 }
-                sum += Integer.parseInt(array[i][j]);
             }
         }
         return sum;
+    }
+
+    private static void checkSizeArray(String[][] array) {
+        if (array.length != VALID_SIZE) {
+            throw new MyArraySizeException();
+        }
+        for (String[] strings : array) {
+            if (strings.length != VALID_SIZE) {
+                throw new MyArraySizeException();
+            }
+        }
     }
 }
